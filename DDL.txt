@@ -1,0 +1,144 @@
+NAMA DATABASE: tubes_basdat
+
+1. Table:
+CREATE TABLE Provinsi (
+	ID INT UNSIGNED AUTO_INCREMENT,
+	Nama VARCHAR(255) NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+2. Table:
+CREATE TABLE Kabupaten_Kota (
+	ID INT UNSIGNED AUTO_INCREMENT,
+	Nama VARCHAR(255) NOT NULL,
+	ID_Provinsi INT UNSIGNED NOT NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (ID_Provinsi) REFERENCES Provinsi (ID) ON DELETE CASCADE
+);
+
+3. Table:
+CREATE TABLE Fasilitas_Kesehatan (
+	ID INT UNSIGNED AUTO_INCREMENT,
+	Nama VARCHAR(255) NOT NULL,
+	Kapasitas_Vaksin INT UNSIGNED DEFAULT 0,
+	ID_Kabupaten_Kota INT UNSIGNED NOT NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (ID_Kabupaten_Kota) REFERENCES Kabupaten_Kota (ID) ON DELETE CASCADE
+);
+
+4. Multivalued Attributes:
+CREATE TABLE Fasilitas_Kesehatan_No_Telp (
+	ID INT UNSIGNED,
+	No_Telp VARCHAR(31) NOT NULL,
+	PRIMARY KEY (ID, No_Telp),
+	FOREIGN KEY (ID) REFERENCES Fasilitas_Kesehatan (ID) ON DELETE CASCADE
+);
+
+5. Specialization:
+CREATE TABLE Klinik (
+	ID INT UNSIGNED,
+	Kelas ENUM("1", "2", "3") NOT NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (ID) REFERENCES Fasilitas_Kesehatan (ID) ON DELETE CASCADE
+);
+
+6. Specialization:
+CREATE TABLE Rumah_Sakit (
+	ID INT UNSIGNED,
+	Kepemilikkan ENUM("Negeri", "Swasta") NOT NULL,
+	Kelas ENUM("1", "2", "3") NOT NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (ID) REFERENCES Fasilitas_Kesehatan (ID) ON DELETE CASCADE
+);
+
+7. Specialization:
+CREATE TABLE Puskesmas (
+	ID INT UNSIGNED,
+	IsRawatInap BOOLEAN NOT NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (ID) REFERENCES Fasilitas_Kesehatan (ID) ON DELETE CASCADE
+);
+
+8. Table:
+CREATE TABLE Batch_Vaksin (
+	ID INT UNSIGNED AUTO_INCREMENT,
+	Jumlah_Tersedia INT UNSIGNED NOT NULL,
+	Jumlah_Terpakai INT UNSIGNED NOT NULL,
+	Tanggal_Kadaluarsa DATE NOT NULL,
+	ID_Fasilitas_Kesehatan INT UNSIGNED NOT NULL,
+	ID_Jenis_Vaksin INT UNSIGNED NOT NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (ID_Fasilitas_Kesehatan) REFERENCES Fasilitas_Kesehatan (ID) ON DELETE CASCADE,
+	FOREIGN KEY (ID_Jenis_Vaksin) REFERENCES Jenis_Vaksin (ID) ON DELETE CASCADE,
+	CONSTRAINT Available CHECK(Jumlah_Tersedia >= Jumlah_Terpakai)
+);
+
+9. Table:
+CREATE TABLE Log_Record (
+	ID INT UNSIGNED AUTO_INCREMENT,
+	Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+	Status ENUM("Diterima", "Tidak diterima") NOT NULL,
+	ID_Kabupaten_Kota INT UNSIGNED NOT NULL,
+	ID_Batch_Vaksin INT UNSIGNED NOT NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (ID_Kabupaten_Kota) REFERENCES Kabupaten_Kota (ID) ON DELETE CASCADE,
+	FOREIGN KEY (ID_Batch_Vaksin) REFERENCES Batch_Vaksin (ID) ON DELETE CASCADE
+);
+
+10. Table:
+CREATE TABLE Jenis_Vaksin (
+	ID INT UNSIGNED AUTO_INCREMENT,
+	Produsen VARCHAR(255) NOT NULL,
+	Nama VARCHAR(255) NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+11. Relationship:
+CREATE TABLE Counter_Effect (
+	ID_Jenis_Vaksin INT UNSIGNED,
+	ID_Penyakit INT UNSIGNED,
+	PRIMARY KEY (ID_Jenis_Vaksin, ID_Penyakit),
+	FOREIGN KEY (ID_Jenis_Vaksin) REFERENCES Jenis_Vaksin (ID) ON DELETE CASCADE,
+	FOREIGN KEY (ID_Penyakit) REFERENCES Penyakit (ID) ON DELETE CASCADE
+);
+
+12. Table:
+CREATE TABLE Penyakit (
+	ID INT UNSIGNED AUTO_INCREMENT,
+	Nama VARCHAR(255) NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+13. Relationship:
+CREATE TABLE Mengidap (
+	ID_Penyakit INT UNSIGNED,
+	NIK VARCHAR(16),
+	PRIMARY KEY(ID_Penyakit, NIK),
+	FOREIGN KEY (ID_Penyakit) REFERENCES Penyakit (ID) ON DELETE CASCADE,
+	FOREIGN KEY (NIK) REFERENCES Penduduk (NIK) ON DELETE CASCADE
+);
+
+14. Table:
+CREATE TABLE Penduduk (
+	NIK VARCHAR(16),
+	Nama_Depan VARCHAR(255) NOT NULL,
+	Nama_Belakang VARCHAR(255) NOT NULL,
+	No_Telp VARCHAR(31) NOT NULL,
+	Jenis_Kelamin ENUM("L", "P") NOT NULL,
+	Pekerjaan VARCHAR(255) NOT NULL,
+	Kategori VARCHAR(255) NOT NULL,
+	Status_Vaksinasi ENUM("Belum divaksin", "Vaksin pertama", "Vaksin kedua", "Vaksin ketiga") DEFAULT "Belum divaksin",
+	Tanggal_Lahir DATE NOT NULL,
+	PRIMARY KEY (NIK)
+);
+
+15. RELATIONSHIP:
+CREATE TABLE Divaksin (
+	NIK VARCHAR(16),
+	ID_Batch_Vaksin INT UNSIGNED,
+	Tahap_Vaksin ENUM("Vaksin pertama", "Vaksin kedua", "Vaksin ketiga") NOT NULL,
+	Tanggal_Vaksin DATE DEFAULT CURRENT_DATE(),
+	PRIMARY KEY (NIK, ID_Batch_Vaksin),
+	FOREIGN KEY (NIK) REFERENCES Penduduk (NIK) ON DELETE CASCADE,
+	FOREIGN KEY (ID_Batch_Vaksin) REFERENCES Batch_Vaksin (ID) ON DELETE CASCADE
+);
