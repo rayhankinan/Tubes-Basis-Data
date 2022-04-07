@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.6.5-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.19  Distrib 10.5.12-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: tubes_basdat
 -- ------------------------------------------------------
--- Server version	10.6.5-MariaDB
+-- Server version	10.5.12-MariaDB-1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,14 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `tubes_basdat`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `tubes_basdat` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `tubes_basdat`;
 
 --
 -- Table structure for table `batch_vaksin`
@@ -106,6 +98,107 @@ CREATE TABLE `divaksin` (
 
 LOCK TABLES `divaksin` WRITE;
 /*!40000 ALTER TABLE `divaksin` DISABLE KEYS */;
+INSERT INTO `divaksin` (`NIK`, `ID_Batch_Vaksin`, `Tahap_Vaksin`, `Tanggal_Vaksin`) VALUES 
+		(3326164909000099, 1, Vaksin kedua, '2021-10-12'),   
+                (3326164909000017, 46, Vaksin kedua, '2020-11-23'),  
+                (3326164909000077, 20, Vaksin kedua, '2021-10-21'),  
+                (3326164909000070, 24, Vaksin kedua, '2019-06-17'),  
+                (3326164909000095, 50, Vaksin ketiga, '2021-08-28'), 
+                (3326164909000055, 15, Vaksin pertama, '2021-04-16'),
+                (3326164909000004, 61, Vaksin pertama, '2021-06-28'),
+                (3326164909000065, 56, Vaksin ketiga, '2020-02-12'), 
+                (3326164909000083, 20, Vaksin ketiga, '2019-12-25'),
+                (3326164909000090, 60, Vaksin kedua, '2019-07-07'),
+                (3326164909000090, 7, Vaksin pertama, '2021-07-02'),
+                (3326164909000050, 67, Vaksin ketiga, '2019-04-25'),
+                (3326164909000044, 10, Vaksin kedua, '2019-05-27'),
+                (3326164909000059, 23, Vaksin kedua, '2021-05-07'),
+                (3326164909000052, 37, Vaksin kedua, '2020-10-28'),
+                (3326164909000036, 51, Vaksin ketiga, '2020-06-07'),
+                (3326164909000002, 96, Vaksin kedua, '2019-07-05'),
+                (3326164909000070, 46, Vaksin ketiga, '2021-05-06'),
+                (3326164909000031, 9, Vaksin pertama, '2021-05-23'),
+                (3326164909000045, 23, Vaksin kedua, '2020-05-10'),
+                (3326164909000099, 66, Vaksin kedua, '2021-10-04'),
+                (3326164909000086, 45, Vaksin kedua, '2021-03-16'),
+                (3326164909000037, 63, Vaksin ketiga, '2020-10-10'),
+                (3326164909000083, 77, Vaksin kedua, '2021-08-18'),
+                (3326164909000048, 70, Vaksin ketiga, '2019-07-25'),
+                (3326164909000033, 9, Vaksin ketiga, '2021-07-19'),
+                (3326164909000048, 16, Vaksin ketiga, '2021-05-25'),
+                (3326164909000099, 89, Vaksin kedua, '2021-05-15'),
+                (3326164909000073, 30, Vaksin ketiga, '2020-08-02'),
+                (3326164909000014, 66, Vaksin ketiga, '2020-04-27'),
+                (3326164909000019, 33, Vaksin ketiga, '2020-02-21'),
+                (3326164909000054, 58, Vaksin kedua, '2019-01-21'),
+                (3326164909000093, 26, Vaksin pertama, '2020-10-22'),
+                (3326164909000100, 29, Vaksin kedua, '2019-12-25'),
+                (3326164909000053, 57, Vaksin kedua, '2019-12-11'),
+                (3326164909000028, 39, Vaksin pertama, '2019-10-11'),
+                (3326164909000040, 10, Vaksin kedua, '2021-03-07'),
+                (3326164909000073, 18, Vaksin ketiga, '2021-07-03'),
+                (3326164909000081, 48, Vaksin kedua, '2021-07-26'),
+                (3326164909000055, 47, Vaksin kedua, '2020-11-13'),
+                (3326164909000082, 24, Vaksin ketiga, '2021-02-17'),
+                (3326164909000034, 73, Vaksin pertama, '2020-07-21'),
+                (3326164909000020, 78, Vaksin pertama, '2021-02-01'),
+                (3326164909000071, 48, Vaksin ketiga, '2020-02-18'),
+                (3326164909000038, 87, Vaksin kedua, '2021-12-20'),
+                (3326164909000072, 81, Vaksin kedua, '2021-07-11'),
+                (3326164909000081, 59, Vaksin pertama, '2020-08-18'),
+                (3326164909000025, 43, Vaksin ketiga, '2020-03-05'),
+                (3326164909000093, 2, Vaksin kedua, '2021-03-26'),
+                (3326164909000036, 23, Vaksin kedua, '2019-09-09'),
+                (3326164909000004, 44, Vaksin kedua, '2019-03-16'),
+                (3326164909000094, 15, Vaksin pertama, '2020-04-27'),
+                (3326164909000058, 92, Vaksin pertama, '2019-05-03'),
+                (3326164909000089, 31, Vaksin ketiga, '2019-01-10'),
+                (3326164909000087, 24, Vaksin kedua, '2019-09-11'),
+                (3326164909000048, 47, Vaksin kedua, '2019-11-12'),
+                (3326164909000044, 49, Vaksin kedua, '2020-10-20'),
+                (3326164909000065, 71, Vaksin ketiga, '2020-11-12'),
+                (3326164909000014, 60, Vaksin kedua, '2021-07-26'),
+                (3326164909000055, 1, Vaksin pertama, '2020-01-06'),
+                (3326164909000072, 66, Vaksin ketiga, '2021-01-24'),
+                (3326164909000014, 96, Vaksin kedua, '2019-12-17'),
+                (3326164909000031, 75, Vaksin ketiga, '2020-09-24'),
+                (3326164909000073, 14, Vaksin pertama, '2020-05-12'),
+                (3326164909000013, 23, Vaksin kedua, '2020-06-14'),
+                (3326164909000060, 82, Vaksin ketiga, '2020-11-21'),
+                (3326164909000057, 49, Vaksin kedua, '2021-12-03'),
+                (3326164909000066, 51, Vaksin pertama, '2020-06-16'),
+                (3326164909000098, 29, Vaksin kedua, '2021-01-24'),
+                (3326164909000021, 71, Vaksin ketiga, '2019-02-25'),
+                (3326164909000035, 35, Vaksin ketiga, '2020-09-07'),
+                (3326164909000018, 64, Vaksin pertama, '2019-07-17'),
+                (3326164909000061, 83, Vaksin ketiga, '2019-03-03'),
+                (3326164909000093, 50, Vaksin pertama, '2020-05-19'),
+                (3326164909000050, 27, Vaksin kedua, '2020-11-11'),
+                (3326164909000049, 65, Vaksin pertama, '2021-01-14'),
+                (3326164909000072, 16, Vaksin ketiga, '2019-04-22'),
+                (3326164909000025, 31, Vaksin ketiga, '2021-12-23'),
+                (3326164909000051, 60, Vaksin pertama, '2021-01-07'),
+                (3326164909000045, 71, Vaksin kedua, '2019-05-24'),
+                (3326164909000093, 72, Vaksin ketiga, '2020-08-08'),
+                (3326164909000059, 24, Vaksin kedua, '2020-06-03'),
+                (3326164909000091, 94, Vaksin pertama, '2021-06-22'),
+                (3326164909000097, 70, Vaksin ketiga, '2021-11-20'),
+                (3326164909000092, 28, Vaksin ketiga, '2020-12-26'),
+                (3326164909000058, 51, Vaksin pertama, '2021-10-11'),
+                (3326164909000004, 96, Vaksin pertama, '2019-08-02'),
+                (3326164909000001, 26, Vaksin pertama, '2020-04-20'),
+                (3326164909000061, 67, Vaksin pertama, '2020-10-25'),
+                (3326164909000085, 9, Vaksin pertama, '2020-08-08'),
+                (3326164909000082, 20, Vaksin ketiga, '2021-07-04'),
+                (3326164909000075, 93, Vaksin pertama, '2021-03-04'),
+                (3326164909000094, 16, Vaksin ketiga, '2021-02-12'),
+                (3326164909000018, 21, Vaksin kedua, '2021-09-20'),
+                (3326164909000006, 42, Vaksin kedua, '2019-07-15'),
+                (3326164909000094, 65, Vaksin ketiga, '2020-05-28'),
+                (3326164909000030, 58, Vaksin ketiga, '2019-10-27'),
+                (3326164909000048, 80, Vaksin kedua, '2019-07-12'),
+                (3326164909000077, 84, Vaksin ketiga, '2019-03-13'),
+                (3326164909000053, 54, Vaksin ketiga, '2019-11-26');
 /*!40000 ALTER TABLE `divaksin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +265,7 @@ CREATE TABLE `jenis_vaksin` (
   `Produsen` varchar(255) NOT NULL,
   `Nama` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,6 +274,7 @@ CREATE TABLE `jenis_vaksin` (
 
 LOCK TABLES `jenis_vaksin` WRITE;
 /*!40000 ALTER TABLE `jenis_vaksin` DISABLE KEYS */;
+INSERT INTO `jenis_vaksin` VALUES (2,'China','Sinovac'),(3,'Inggris','AstraZeneca'),(4,'China','Sinopharm'),(5,'Amerika Serikat','Moderna'),(6,'Amerika Serikat','Pfizer'),(7,'Amerika Serikat','Novavax'),(8,'Rusia','Sputnik-V'),(9,'Belanda','Janssen'),(10,'China','Convidencia'),(11,'China','Zifivax'),(12,'China','CanSino'),(13,'China','RBD-Dimer');
 /*!40000 ALTER TABLE `jenis_vaksin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,7 +435,7 @@ CREATE TABLE `penyakit` (
 
 LOCK TABLES `penyakit` WRITE;
 /*!40000 ALTER TABLE `penyakit` DISABLE KEYS */;
-INSERT INTO `penyakit` (`ID`, `Nama`) VALUES (1,'Influenza'),(2,'TBC'),(3,'Muntaber'),(4,'Cacar Air'),(5,'Tifus'),(6,'Campak'),(7,'Pneumonia'),(8,'Hepatitis'),(9,'Kolera'),(10,'Polio'),(11,'Ebola'),(12,'AIDS'),(13,'DBD'),(14,'Rabies'),(15,'Kurap'),(16,'Malaria'),(17,'Cacingan'),(18,'Titanus'),(19,'SARS'),(20,'Rubella'),(21,'Flu Burung'),(22,'Chikungunya'),(23,'Demam Kuning'),(24,'Anthrax'),(25,'Leptospirosis'),(26,'Abses Paru'),(27,'Abses Gigi'),(28,'ADHD'),(29,'Amnesia'),(30,'Anemia'),(31,'Asma'),(32,'Bronkitis'),(33,'Depresi'),(34,'Difteri'),(35,'Diabetes'),(36,'Diare'),(37,'Beri-Beri'),(38,'Disentri'),(39,'Eksem'),(40,'Epilepsi'),(41,'Filariasis'),(42,'Fraktur Humerus'),(43,'Gagal Ginjal'),(44,'Gagal Jantung'),(45,'Hipotiroid'),(46,'Gastroparesis'),(47,'Hernia'),(48,'Herpes'),(49,'Hipertensi'),(50,'Hiperteroid'),(51,'Askariasis'),(52,'Ileus'),(53,'Entrobiasis'),(54,'Infertilitas'),(55,'Jamur Kuku'),(56,'Jamur Kepala'),(57,'Leukimia'),(58,'Katarak'),(59,'Kanker Paru'),(60,'Kanker Ovarium'),(61,'Kanker Serviks'),(62,'Hemofilia'),(63,'Gonorrhea'),(64,'Kudis'),(65,'Kista'),(66,'Labirintis'),(67,'Migrain'),(68,'Mastitis'),(69,'Panu'),(70,'Varises'),(71,'GERD'),(72,'Demensia'),(73,'Glaukoma'),(74,'Parkinson'),(75,'Pleuritis'),(76,'Pilek'),(77,'Batuk'),(78,'Pankreatitis'),(79,'Gastritis'),(80,'Miopia'),(81,'Bronkiolitis'),(82,'Prostatitis'),(83,'Viral Meningitis'),(84,'Sariawan'),(85,'Maag'),(86,'Sifilis'),(87,'Sinusitis'),(88,'Astigmatisme'),(89,'Tumor'),(90,'Apendisitis'),(91,'Volvulus'),(92,'Vaginitis'),(93,'Wasir'),(94,'Xanthelasma'),(95,'Faringitis'),(96,'Hipermetropia'),(97,'Gingivitis'),(98,'Ruptur Ginjal'),(99,'Carpal Tunnel'),(100,'ACL');
+INSERT INTO `penyakit` VALUES (1,'Influenza'),(2,'TBC'),(3,'Muntaber'),(4,'Cacar Air'),(5,'Tifus'),(6,'Campak'),(7,'Pneumonia'),(8,'Hepatitis'),(9,'Kolera'),(10,'Polio'),(11,'Ebola'),(12,'AIDS'),(13,'DBD'),(14,'Rabies'),(15,'Kurap'),(16,'Malaria'),(17,'Cacingan'),(18,'Titanus'),(19,'SARS'),(20,'Rubella'),(21,'Flu Burung'),(22,'Chikungunya'),(23,'Demam Kuning'),(24,'Anthrax'),(25,'Leptospirosis'),(26,'Abses Paru'),(27,'Abses Gigi'),(28,'ADHD'),(29,'Amnesia'),(30,'Anemia'),(31,'Asma'),(32,'Bronkitis'),(33,'Depresi'),(34,'Difteri'),(35,'Diabetes'),(36,'Diare'),(37,'Beri-Beri'),(38,'Disentri'),(39,'Eksem'),(40,'Epilepsi'),(41,'Filariasis'),(42,'Fraktur Humerus'),(43,'Gagal Ginjal'),(44,'Gagal Jantung'),(45,'Hipotiroid'),(46,'Gastroparesis'),(47,'Hernia'),(48,'Herpes'),(49,'Hipertensi'),(50,'Hiperteroid'),(51,'Askariasis'),(52,'Ileus'),(53,'Entrobiasis'),(54,'Infertilitas'),(55,'Jamur Kuku'),(56,'Jamur Kepala'),(57,'Leukimia'),(58,'Katarak'),(59,'Kanker Paru'),(60,'Kanker Ovarium'),(61,'Kanker Serviks'),(62,'Hemofilia'),(63,'Gonorrhea'),(64,'Kudis'),(65,'Kista'),(66,'Labirintis'),(67,'Migrain'),(68,'Mastitis'),(69,'Panu'),(70,'Varises'),(71,'GERD'),(72,'Demensia'),(73,'Glaukoma'),(74,'Parkinson'),(75,'Pleuritis'),(76,'Pilek'),(77,'Batuk'),(78,'Pankreatitis'),(79,'Gastritis'),(80,'Miopia'),(81,'Bronkiolitis'),(82,'Prostatitis'),(83,'Viral Meningitis'),(84,'Sariawan'),(85,'Maag'),(86,'Sifilis'),(87,'Sinusitis'),(88,'Astigmatisme'),(89,'Tumor'),(90,'Apendisitis'),(91,'Volvulus'),(92,'Vaginitis'),(93,'Wasir'),(94,'Xanthelasma'),(95,'Faringitis'),(96,'Hipermetropia'),(97,'Gingivitis'),(98,'Ruptur Ginjal'),(99,'Carpal Tunnel'),(100,'ACL');
 /*!40000 ALTER TABLE `penyakit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,7 +459,7 @@ CREATE TABLE `provinsi` (
 
 LOCK TABLES `provinsi` WRITE;
 /*!40000 ALTER TABLE `provinsi` DISABLE KEYS */;
-INSERT INTO `provinsi` (`ID`, `Nama`) VALUES (1,'Aceh'),(2,'Sumatra Utara'),(3,'Sumatra Barat'),(4,'Riau'),(5,'Jambi'),(6,'Kepulauan Riau'),(7,'Bengkulu'),(8,'Sumatra Selatan'),(9,'Kepulauan Bangka Belitung'),(10,'Lampung'),(11,'Banten'),(12,'DKI Jakarta'),(13,'Jawa Barat'),(14,'Jawa Tengah'),(15,'DI Yogyakarta'),(16,'Jawa Timur'),(17,'Bali'),(18,'NTB'),(19,'NTT'),(20,'Kalimantan Barat'),(21,'Kalimantan Tengah'),(22,'Kalimantan Selatan'),(23,'Kalimantan Timur'),(24,'Kalimantan Utara'),(25,'Sulawesi Barat'),(26,'Sulawesi Selatan'),(27,'Sulawesi Tenggara'),(28,'Sulawesi Tengah'),(29,'Gorontalo'),(30,'Sulawesi Utara'),(31,'Maluku Utara'),(32,'Maluku'),(33,'Papua Barat'),(34,'Papua');
+INSERT INTO `provinsi` VALUES (1,'Aceh'),(2,'Sumatra Utara'),(3,'Sumatra Barat'),(4,'Riau'),(5,'Jambi'),(6,'Kepulauan Riau'),(7,'Bengkulu'),(8,'Sumatra Selatan'),(9,'Kepulauan Bangka Belitung'),(10,'Lampung'),(11,'Banten'),(12,'DKI Jakarta'),(13,'Jawa Barat'),(14,'Jawa Tengah'),(15,'DI Yogyakarta'),(16,'Jawa Timur'),(17,'Bali'),(18,'NTB'),(19,'NTT'),(20,'Kalimantan Barat'),(21,'Kalimantan Tengah'),(22,'Kalimantan Selatan'),(23,'Kalimantan Timur'),(24,'Kalimantan Utara'),(25,'Sulawesi Barat'),(26,'Sulawesi Selatan'),(27,'Sulawesi Tenggara'),(28,'Sulawesi Tengah'),(29,'Gorontalo'),(30,'Sulawesi Utara'),(31,'Maluku Utara'),(32,'Maluku'),(33,'Papua Barat'),(34,'Papua');
 /*!40000 ALTER TABLE `provinsi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -427,4 +521,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-07 20:19:04
+-- Dump completed on 2022-04-07 20:35:47
