@@ -331,7 +331,7 @@ CREATE TABLE `penyakit` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nama` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,6 +340,7 @@ CREATE TABLE `penyakit` (
 
 LOCK TABLES `penyakit` WRITE;
 /*!40000 ALTER TABLE `penyakit` DISABLE KEYS */;
+INSERT INTO `penyakit` (`ID`, `Nama`) VALUES (1,'Influenza'),(2,'TBC'),(3,'Muntaber'),(4,'Cacar Air'),(5,'Tifus'),(6,'Campak'),(7,'Pneumonia'),(8,'Hepatitis'),(9,'Kolera'),(10,'Polio'),(11,'Ebola'),(12,'AIDS'),(13,'DBD'),(14,'Rabies'),(15,'Kurap'),(16,'Malaria'),(17,'Cacingan'),(18,'Titanus'),(19,'SARS'),(20,'Rubella'),(21,'Flu Burung'),(22,'Chikungunya'),(23,'Demam Kuning'),(24,'Anthrax'),(25,'Leptospirosis'),(26,'Abses Paru'),(27,'Abses Gigi'),(28,'ADHD'),(29,'Amnesia'),(30,'Anemia'),(31,'Asma'),(32,'Bronkitis'),(33,'Depresi'),(34,'Difteri'),(35,'Diabetes'),(36,'Diare'),(37,'Beri-Beri'),(38,'Disentri'),(39,'Eksem'),(40,'Epilepsi'),(41,'Filariasis'),(42,'Fraktur Humerus'),(43,'Gagal Ginjal'),(44,'Gagal Jantung'),(45,'Hipotiroid'),(46,'Gastroparesis'),(47,'Hernia'),(48,'Herpes'),(49,'Hipertensi'),(50,'Hiperteroid'),(51,'Askariasis'),(52,'Ileus'),(53,'Entrobiasis'),(54,'Infertilitas'),(55,'Jamur Kuku'),(56,'Jamur Kepala'),(57,'Leukimia'),(58,'Katarak'),(59,'Kanker Paru'),(60,'Kanker Ovarium'),(61,'Kanker Serviks'),(62,'Hemofilia'),(63,'Gonorrhea'),(64,'Kudis'),(65,'Kista'),(66,'Labirintis'),(67,'Migrain'),(68,'Mastitis'),(69,'Panu'),(70,'Varises'),(71,'GERD'),(72,'Demensia'),(73,'Glaukoma'),(74,'Parkinson'),(75,'Pleuritis'),(76,'Pilek'),(77,'Batuk'),(78,'Pankreatitis'),(79,'Gastritis'),(80,'Miopia'),(81,'Bronkiolitis'),(82,'Prostatitis'),(83,'Viral Meningitis'),(84,'Sariawan'),(85,'Maag'),(86,'Sifilis'),(87,'Sinusitis'),(88,'Astigmatisme'),(89,'Tumor'),(90,'Apendisitis'),(91,'Volvulus'),(92,'Vaginitis'),(93,'Wasir'),(94,'Xanthelasma'),(95,'Faringitis'),(96,'Hipermetropia'),(97,'Gingivitis'),(98,'Ruptur Ginjal'),(99,'Carpal Tunnel'),(100,'ACL');
 /*!40000 ALTER TABLE `penyakit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,7 +355,7 @@ CREATE TABLE `provinsi` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nama` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,6 +364,7 @@ CREATE TABLE `provinsi` (
 
 LOCK TABLES `provinsi` WRITE;
 /*!40000 ALTER TABLE `provinsi` DISABLE KEYS */;
+INSERT INTO `provinsi` (`ID`, `Nama`) VALUES (1,'Aceh'),(2,'Sumatra Utara'),(3,'Sumatra Barat'),(4,'Riau'),(5,'Jambi'),(6,'Kepulauan Riau'),(7,'Bengkulu'),(8,'Sumatra Selatan'),(9,'Kepulauan Bangka Belitung'),(10,'Lampung'),(11,'Banten'),(12,'DKI Jakarta'),(13,'Jawa Barat'),(14,'Jawa Tengah'),(15,'DI Yogyakarta'),(16,'Jawa Timur'),(17,'Bali'),(18,'NTB'),(19,'NTT'),(20,'Kalimantan Barat'),(21,'Kalimantan Tengah'),(22,'Kalimantan Selatan'),(23,'Kalimantan Timur'),(24,'Kalimantan Utara'),(25,'Sulawesi Barat'),(26,'Sulawesi Selatan'),(27,'Sulawesi Tenggara'),(28,'Sulawesi Tengah'),(29,'Gorontalo'),(30,'Sulawesi Utara'),(31,'Maluku Utara'),(32,'Maluku'),(33,'Papua Barat'),(34,'Papua');
 /*!40000 ALTER TABLE `provinsi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,4 +426,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-06 21:20:34
+-- Dump completed on 2022-04-07 17:11:50
