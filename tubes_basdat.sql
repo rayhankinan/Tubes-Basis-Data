@@ -191,7 +191,7 @@ CREATE TABLE `kabupaten_kota` (
   PRIMARY KEY (`ID`),
   KEY `ID_Provinsi` (`ID_Provinsi`),
   CONSTRAINT `kabupaten_kota_ibfk_1` FOREIGN KEY (`ID_Provinsi`) REFERENCES `provinsi` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,6 +200,7 @@ CREATE TABLE `kabupaten_kota` (
 
 LOCK TABLES `kabupaten_kota` WRITE;
 /*!40000 ALTER TABLE `kabupaten_kota` DISABLE KEYS */;
+INSERT INTO `kabupaten_kota` (`ID`, `Nama`, `ID_Provinsi`) VALUES (1,'Banda Aceh',1),(2,'Langsa',1),(3,'Lhokseumawe',1),(4,'Sabang',1),(5,'Subulussalam',1),(6,'Binjai',2),(7,'Gunungsitoli',2),(8,'Medan',2),(9,'Padang Sidempuan',2),(10,'Pematangsiantar',2),(11,'Sibolga',2),(12,'Tangjungbalai',2),(13,'Tebing Tinggi',2),(14,'Bukittinggi',3),(15,'Padang',3),(16,'Padang Panjang',3),(17,'Pariaman',3),(18,'Payakumbuh',3),(19,'Sawahlunto',3),(20,'Solok',3),(21,'Dumai',4),(22,'Pekanbaru',4),(23,'Jambi',5),(24,'Sungai Penuh',5),(25,'Batam',6),(26,'Tanjung Pinang',6),(27,'Bengkulu',7),(28,'Lubuklinggau',8),(29,'Pagar Alam',8),(30,'Palembang',8),(31,'Prabumulih',8),(32,'Pangkal Pinang',9),(33,'Bandar Lampung',10),(34,'Metro',10),(35,'Cilegon',11),(36,'Serang',11),(37,'Tanggerang Selatan',11),(38,'Tanggerang',11),(39,'Jakarta Barat',12),(40,'Jakarta Pusat',12),(41,'Jakarta Selatan',12),(42,'Jakarta Timur',12),(43,'Jakarta Utara',12),(44,'Bandung',13),(45,'Bandung Barat',13),(46,'Banjar',13),(47,'Bekasi',13),(48,'Bogor',13),(49,'Cimahi',13),(50,'Cirebon',13),(51,'Depok',13),(52,'Sukabumi',13),(53,'Tasikmalaya',13),(54,'Magelang',14),(55,'Pekalongan',14),(56,'Salatiga',14),(57,'Semarang',14),(58,'Surakarta',14),(59,'Tegal',14),(60,'Yogyakarta',15),(61,'Batu',16),(62,'Blitar',16),(63,'Kediri',16),(64,'Madiun',16),(65,'Malang',16),(66,'Mojokerto',16),(67,'Pasuruan',16),(68,'Probolinggo',16),(69,'Surabaya',16),(70,'Denpasar',17),(71,'Bima',18),(72,'Mataram',18),(73,'Kupang',19),(74,'Pontianak',20),(75,'Singkawang',20),(76,'Palangka Raya',21),(77,'Banjarbaru',22),(78,'Banjarmasin',22),(79,'Balikpapan',23),(80,'Bontang',23),(81,'Samarinda',23),(82,'Tarakan',24),(83,'Mamuju',25),(84,'Makassar',26),(85,'Palopo',26),(86,'Parepare',26),(87,'Baubau',27),(88,'Kendari',27),(89,'Palu',28),(90,'Gorontalo',29),(91,'Bitung',30),(92,'Kotamobagu',30),(93,'Manado',30),(94,'Tomohon',30),(95,'Ternate',31),(96,'Tidore',31),(97,'Ambon',32),(98,'Tual',32),(99,'Sorong',33),(100,'Jayapura',34);
 /*!40000 ALTER TABLE `kabupaten_kota` ENABLE KEYS */;
 UNLOCK TABLES;
 
