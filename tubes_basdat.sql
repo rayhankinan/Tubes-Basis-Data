@@ -309,7 +309,7 @@ CREATE TABLE `penduduk` (
   `No_Telp` varchar(31) NOT NULL,
   `Jenis_Kelamin` enum('L','P') NOT NULL,
   `Pekerjaan` varchar(255) NOT NULL,
-  `Kategori` varchar(255) NOT NULL,
+  `Kategori` enum('Tenaga kesehatan','Lanjut usia','Petugas publik','Masyarakat umum') NOT NULL,
   `Status_Vaksinasi` enum('Belum divaksin','Vaksin pertama','Vaksin kedua','Vaksin ketiga') DEFAULT 'Belum divaksin',
   `Tanggal_Lahir` date NOT NULL,
   PRIMARY KEY (`NIK`)
@@ -431,4 +431,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-07 21:56:59
+-- Dump completed on 2022-04-07 22:09:37

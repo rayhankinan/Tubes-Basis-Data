@@ -126,7 +126,7 @@ CREATE TABLE Penduduk (
 	No_Telp VARCHAR(31) NOT NULL,
 	Jenis_Kelamin ENUM("L", "P") NOT NULL,
 	Pekerjaan VARCHAR(255) NOT NULL,
-	Kategori VARCHAR(255) NOT NULL,
+	Kategori ENUM("Tenaga kesehatan", "Lanjut usia", "Petugas publik", "Masyarakat umum") NOT NULL,
 	Status_Vaksinasi ENUM("Belum divaksin", "Vaksin pertama", "Vaksin kedua", "Vaksin ketiga") DEFAULT "Belum divaksin",
 	Tanggal_Lahir DATE NOT NULL,
 	PRIMARY KEY (NIK)
