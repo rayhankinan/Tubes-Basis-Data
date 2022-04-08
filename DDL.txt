@@ -75,12 +75,11 @@ CREATE TABLE Batch_Vaksin (
 
 9. Table:
 CREATE TABLE Log_Record (
-	ID INT UNSIGNED AUTO_INCREMENT,
 	Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 	Status ENUM("Diterima", "Tidak diterima") NOT NULL,
 	ID_Kabupaten_Kota INT UNSIGNED NOT NULL,
 	ID_Batch_Vaksin INT UNSIGNED NOT NULL,
-	PRIMARY KEY (ID),
+	PRIMARY KEY (ID_Batch_Vaksin, Timestamp),
 	FOREIGN KEY (ID_Kabupaten_Kota) REFERENCES Kabupaten_Kota (ID) ON DELETE CASCADE,
 	FOREIGN KEY (ID_Batch_Vaksin) REFERENCES Batch_Vaksin (ID) ON DELETE CASCADE
 );
