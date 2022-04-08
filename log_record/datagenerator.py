@@ -27,27 +27,35 @@ def random_date(start, end, prop):
 print("INSERT INTO log_record (Timestamp, Status, ID_Kabupaten_Kota, ID_Batch_Vaksin)")
 print("VALUES")
 for i in range (100):
-  status = ["Diterima", "Diterima", "Diterima", "Diterima", "Diterima", "Diterima", "Tidak Diterima", "Diterima", "Diterima"]
-  stat = status[random.randint(0, 8)]
-  date = random_date("1/1/2021 1:30 PM", "8/4/2022 4:50 AM", random.random())
+  date = random_date("1/1/2021 1:30 PM", "31/12/2021 4:50 AM", random.random())
   date_time = date.split(" ")
   dates = date_time[0].split("/")
-  secs = random.randint(0, 59)
-  if (secs < 10):
-    secs = str(f'0{secs}')
-  else:
-    secs = str(secs)
-  id_batch_vaksin = random.randint(1, 100)
   id_kab_kota = random.randint(1, 100)
+  for j in range (3):
+    secs = random.randint(0, 59)
+    if (secs < 10):
+      secs = str(f'0{secs}')
+    else:
+      secs = str(secs)
+    print('  ("', end="")
+    print(dates[2], end="-")
+    print(dates[0], end="-")
+    print(dates[1], end=' ')
+    print(date_time[1], end=":")
+    print(secs, end='", "')
+    print("Tidak Diterima", end='", ')
+    print(id_kab_kota, end=", ")
+    print(i + 1, end="")
+    
   print('  ("', end="")
   print(dates[2], end="-")
-  print(dates[1], end="-")
-  print(dates[0], end=' ')
+  print(dates[0], end="-")
+  print(dates[1], end=' ')
   print(date_time[1], end=":")
   print(secs, end='", "')
-  print(stat, end='", ')
+  print("Diterima", end='", ')
   print(id_kab_kota, end=", ")
-  print(id_batch_vaksin, end="")
+  print(i + 1, end="")
   if (i != 99):
     print("),")
   else:
