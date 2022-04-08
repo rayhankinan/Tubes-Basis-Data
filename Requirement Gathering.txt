@@ -1,0 +1,60 @@
+Provinsi:
+	ID
+	Nama
+	(Punya relasi double dengan kabupaten atau kota, yaitu satu provinsi terdiri atas banyak kabupaten atau kota)
+
+Kabupaten atau Kota:
+	ID
+	Nama
+	(Punya relasi double dengan batch kabuptan atau kota, yaitu satu kabupaten atau kota memiliki banyak fasilitas kesehatan)
+
+Fasilitas Kesehatan:
+	ID
+	Nama
+	{ No. Telp }
+	Kapasitas Vaksin per Hari
+	(Dapat terbagi menjadi 3 jenis: Rumah Sakit, Puskesmas, dan Klinik)
+	(Punya relasi double dengan batch vaksin, dimana fasilitas kesehatan menyimpan banyak batch vaksin)
+
+Rumah Sakit:
+	Kepemilikkan (negeri / swasta)
+	Kelas (1, 2, atau 3)
+
+Puskesmas:
+	isRawatInap (bisa rawat inap / tidak)
+
+Klinik:
+	Kelas (pratama / utama)
+
+Batch Vaksin:
+	ID
+	Jumlah Tersedia
+	Jumlah Terpakai
+	Tanggal Kadaluarsa
+	(Punya 1 jenis vaksin)
+	(Punya relasi double terhadap kabupaten atau kota, yaitu batch vaksin akan dikirimkan ke kota atau kabupaten dengan tambahan atribut semacam log record [terdiri atas banyak timestamp dan status])
+
+Jenis Vaksin:
+	ID
+	Produsen
+	Nama
+	(Punya relasi double terhadap penyakit, yaitu vaksin jenis ini menolak penyakit apa saja)
+
+Penduduk:
+	NIK
+	Nama
+		Nama Depan
+		Nama Belakang
+	No. Telp (satu saja)
+	Jenis Kelamin
+	Pekerjaan
+	Kategori
+	Status Vaksinasi (vaksin pertama, kedua, atau ketiga)
+	Tanggal Lahir
+	Usia
+	(Punya relasi double terhadap penyakit, yaitu penduduk bisa tidak punya penyakit atau punya banyak penyakit)
+	(Punya relasi double terhadap batch vaksin dengan tambahan atribut tahap vaksin dan tanggal vaksin)
+
+Penyakit:
+	ID
+	Nama
