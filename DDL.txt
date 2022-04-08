@@ -37,7 +37,7 @@ CREATE TABLE Fasilitas_Kesehatan_No_Telp (
 5. Specialization:
 CREATE TABLE Klinik (
 	ID INT UNSIGNED,
-	Kelas ENUM("1", "2", "3") NOT NULL,
+	Kelas ENUM("Pratama", "Utama") NOT NULL,
 	PRIMARY KEY (ID),
 	FOREIGN KEY (ID) REFERENCES Fasilitas_Kesehatan (ID) ON DELETE CASCADE
 );

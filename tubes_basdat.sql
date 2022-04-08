@@ -225,7 +225,7 @@ DROP TABLE IF EXISTS `klinik`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `klinik` (
   `ID` int(10) unsigned NOT NULL,
-  `Kelas` enum('1','2','3') NOT NULL,
+  `Kelas` enum('Pratama','Utama') NOT NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `klinik_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `fasilitas_kesehatan` (`ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -237,7 +237,7 @@ CREATE TABLE `klinik` (
 
 LOCK TABLES `klinik` WRITE;
 /*!40000 ALTER TABLE `klinik` DISABLE KEYS */;
-INSERT INTO `klinik` (`ID`, `Kelas`) VALUES (2,'3'),(5,'1'),(7,'3'),(8,'2'),(12,'1'),(16,'3'),(20,'1'),(21,'3'),(25,'1'),(27,'3'),(28,'1'),(33,'3'),(34,'1'),(36,'3'),(44,'2'),(47,'3'),(49,'2'),(58,'1'),(61,'2'),(64,'3'),(66,'3'),(69,'2'),(71,'3'),(79,'1'),(82,'1'),(83,'3'),(85,'3'),(87,'1'),(92,'1'),(93,'3'),(95,'3'),(97,'1'),(98,'3'),(103,'2'),(108,'3'),(110,'2'),(112,'3'),(114,'3'),(117,'3'),(126,'2'),(129,'1'),(131,'3'),(135,'2'),(136,'3'),(137,'1'),(147,'1'),(150,'3'),(156,'1'),(165,'3'),(167,'1'),(169,'3'),(172,'2'),(173,'3'),(174,'3'),(175,'2'),(178,'3'),(179,'3'),(181,'1'),(182,'2'),(184,'1'),(186,'1'),(187,'2'),(188,'3'),(189,'1'),(193,'3'),(194,'2'),(199,'2'),(200,'2'),(201,'1'),(203,'1'),(214,'2'),(220,'2'),(223,'2'),(224,'3'),(229,'1'),(231,'3'),(232,'2'),(235,'2'),(237,'2'),(241,'3'),(243,'3'),(249,'1'),(250,'3');
+INSERT INTO `klinik` (`ID`, `Kelas`) VALUES (2,'Utama'),(5,'Utama'),(7,'Pratama'),(8,'Utama'),(12,'Utama'),(16,'Utama'),(20,'Pratama'),(21,'Pratama'),(25,'Pratama'),(27,'Utama'),(28,'Utama'),(33,'Utama'),(34,'Pratama'),(36,'Utama'),(44,'Pratama'),(47,'Utama'),(49,'Utama'),(58,'Utama'),(61,'Pratama'),(64,'Pratama'),(66,'Utama'),(69,'Utama'),(71,'Utama'),(79,'Pratama'),(82,'Utama'),(83,'Pratama'),(85,'Utama'),(87,'Pratama'),(92,'Utama'),(93,'Utama'),(95,'Pratama'),(97,'Pratama'),(98,'Pratama'),(103,'Pratama'),(108,'Utama'),(110,'Utama'),(112,'Utama'),(114,'Utama'),(117,'Pratama'),(126,'Utama'),(129,'Pratama'),(131,'Pratama'),(135,'Utama'),(136,'Utama'),(137,'Pratama'),(147,'Pratama'),(150,'Pratama'),(156,'Pratama'),(165,'Pratama'),(167,'Utama'),(169,'Pratama'),(172,'Pratama'),(173,'Utama'),(174,'Pratama'),(175,'Pratama'),(178,'Pratama'),(179,'Utama'),(181,'Pratama'),(182,'Pratama'),(184,'Utama'),(186,'Pratama'),(187,'Utama'),(188,'Pratama'),(189,'Pratama'),(193,'Pratama'),(194,'Pratama'),(199,'Utama'),(200,'Utama'),(201,'Utama'),(203,'Utama'),(214,'Pratama'),(220,'Utama'),(223,'Pratama'),(224,'Utama'),(229,'Pratama'),(231,'Pratama'),(232,'Utama'),(235,'Pratama'),(237,'Pratama'),(241,'Utama'),(243,'Pratama'),(249,'Pratama'),(250,'Pratama');
 /*!40000 ALTER TABLE `klinik` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,4 +437,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-08 14:21:05
+-- Dump completed on 2022-04-08 16:37:40
