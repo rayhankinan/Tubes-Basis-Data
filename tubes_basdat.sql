@@ -54,31 +54,6 @@ LOCK TABLES `batch_vaksin` WRITE;
 INSERT INTO `batch_vaksin` (`ID`, `Jumlah_Tersedia`, `Jumlah_Terpakai`, `Tanggal_Kadaluarsa`, `ID_Fasilitas_Kesehatan`, `ID_Jenis_Vaksin`) VALUES (1,440,11,'2028-09-01',10,7),(2,444,1,'2028-09-01',33,11),(3,200,5,'2025-04-06',77,11),(4,200,7,'2028-11-12',56,9),(5,560,15,'2027-06-15',97,8),(6,109,9,'2025-07-27',60,3),(7,230,0,'2023-04-16',29,4),(8,210,6,'2024-06-23',47,3),(9,125,17,'2027-10-02',23,3),(10,201,8,'2025-12-24',86,7),(11,100,1,'2028-09-26',27,12),(12,310,19,'2028-06-29',5,6),(13,430,13,'2028-02-19',81,11),(14,340,8,'2027-12-31',72,7),(15,200,8,'2023-06-01',9,5),(16,167,20,'2025-12-09',18,9),(17,113,4,'2023-01-13',89,12),(18,310,11,'2029-11-11',50,10),(19,450,7,'2026-10-09',82,12),(20,0,18,'2022-08-14',53,3),(21,40,11,'2022-02-24',17,7),(22,260,1,'2028-06-28',47,12),(23,230,20,'2024-02-11',59,12),(24,90,10,'2022-11-14',33,8),(25,143,16,'2022-10-09',26,1),(26,200,5,'2029-09-29',84,6),(27,300,16,'2029-11-14',14,10),(28,88,11,'2026-08-05',61,4),(29,160,14,'2027-09-08',42,3),(30,186,18,'2027-01-31',50,5),(31,100,7,'2025-03-11',42,1),(32,248,6,'2026-03-28',72,4),(33,244,11,'2026-07-16',96,2),(34,199,8,'2027-07-15',44,2),(35,169,13,'2028-06-13',71,10),(36,200,3,'2024-11-15',57,5),(37,209,8,'2026-02-09',65,6),(38,170,7,'2025-02-10',3,3),(39,246,13,'2023-02-05',42,6),(40,120,11,'2025-12-17',37,12),(41,240,3,'2025-09-03',27,8),(42,160,20,'2024-03-04',63,7),(43,0,16,'2027-12-18',62,8),(44,173,12,'2027-03-16',37,12),(45,175,4,'2024-02-12',8,12),(46,102,19,'2027-12-25',34,6),(47,193,16,'2029-07-04',52,6),(48,366,16,'2023-04-07',32,9),(49,446,16,'2028-07-25',80,12),(50,400,18,'2027-04-09',19,2),(51,99,1,'2029-12-05',61,9),(52,198,5,'2027-02-22',59,4),(53,145,6,'2022-08-10',69,12),(54,183,13,'2028-02-06',5,7),(55,200,13,'2022-09-09',84,3),(56,177,7,'2025-10-04',6,11),(57,480,19,'2024-07-13',8,10),(58,350,19,'2024-10-11',96,7),(59,310,1,'2024-01-23',21,1),(60,112,16,'2025-02-10',61,8),(61,156,19,'2024-03-21',59,7),(62,92,17,'2022-12-30',2,10),(63,200,19,'2027-04-24',28,6),(64,230,16,'2026-08-03',11,6),(65,141,7,'2027-05-09',91,11),(66,185,16,'2023-11-14',63,9),(67,420,15,'2027-05-24',32,9),(68,192,1,'2023-06-04',41,3),(69,300,2,'2025-05-10',69,6),(70,420,10,'2024-12-04',94,4),(71,100,0,'2027-02-03',98,8),(72,310,0,'2025-06-30',59,7),(73,389,0,'2026-08-02',36,4),(74,400,0,'2023-12-09',29,3),(75,447,0,'2026-09-07',64,11),(76,190,0,'2022-10-25',99,10),(77,288,0,'2029-10-03',94,11),(78,197,0,'2025-12-12',40,11),(79,146,0,'2028-10-17',63,1),(80,210,0,'2026-08-21',83,6),(81,310,0,'2029-12-01',11,1),(82,199,0,'2023-03-21',93,6),(83,100,0,'2024-04-11',88,9),(84,213,0,'2025-12-10',49,6),(85,223,0,'2024-08-25',7,5),(86,490,0,'2022-08-21',45,10),(87,100,0,'2028-10-07',21,2),(88,210,0,'2026-04-03',32,1),(89,130,0,'2027-01-30',61,10),(90,310,0,'2029-09-10',73,12),(91,110,0,'2022-05-15',68,3),(92,500,0,'2029-02-11',9,6),(93,166,0,'2024-06-02',46,2),(94,370,0,'2023-03-09',79,12),(95,100,0,'2029-01-27',89,4),(96,188,0,'2028-02-09',92,10),(97,100,0,'2024-03-06',60,12),(98,550,0,'2024-02-24',31,1),(99,270,0,'2028-04-13',11,4),(100,190,0,'2026-05-05',44,7);
 /*!40000 ALTER TABLE `batch_vaksin` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = cp850 */ ;
-/*!50003 SET character_set_results = cp850 */ ;
-/*!50003 SET collation_connection  = cp850_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Vaksin
-BEFORE UPDATE ON Batch_Vaksin
-FOR EACH ROW
-BEGIN
-	IF (OLD.Jumlah_Tersedia > 0 AND OLD.Tanggal_Kadaluarsa >= CURRENT_DATE()) THEN
-		CALL Use_Vaksin(NEW.ID);
-	ELSE
-		SIGNAL SQLSTATE "45000"
-		SET MESSAGE_TEXT = "Vaksin telah habis terpakai atau sudah expired!";
-	END IF;
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `counter_effect`
@@ -144,17 +119,49 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Status
-BEFORE UPDATE ON Divaksin
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Vaksin
+BEFORE INSERT ON Divaksin
 FOR EACH ROW
 BEGIN
-	DECLARE Jumlah_Divaksin INT DEFAULT 0;
-	SELECT COUNT(Divaksin.NIK) INTO Jumlah_Divaksin FROM Divaksin WHERE Divaksin.NIK = NEW.NIK;
-	IF (NEW.Tahap_Vaksin = "Vaksin pertama" AND Jumlah_Divaksin = 0) THEN
+	DECLARE Jumlah_Tersisa INT UNSIGNED;
+	DECLARE Tanggal_Expired DATE;
+	
+	SELECT Batch_Vaksin.Jumlah_Tersedia INTO Jumlah_Tersisa FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
+	SELECT Batch_Vaksin.Tanggal_Kadaluarsa INTO Tanggal_Expired FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
+
+	IF (Jumlah_Tersisa > 0 AND Tanggal_Expired >= CURRENT_DATE()) THEN
+		CALL Use_Vaksin(NEW.ID_Batch_Vaksin);
+	ELSE
+		SIGNAL SQLSTATE "45000"
+		SET MESSAGE_TEXT = "Vaksin telah habis terpakai atau sudah expired!";
+	END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Status
+BEFORE INSERT ON Divaksin
+FOR EACH ROW
+BEGIN
+	DECLARE Status_Vaksin_Saat_Ini ENUM("Belum divaksin", "Vaksin pertama", "Vaksin kedua", "Vaksin ketiga") DEFAULT "Belum divaksin";
+	SELECT Penduduk.Status_Vaksinasi INTO Status_Vaksin_Saat_Ini FROM Penduduk WHERE Penduduk.NIK = NEW.NIK ORDER BY Penduduk.Status_Vaksinasi DESC LIMIT 1;
+
+	IF (NEW.Tahap_Vaksin = "Vaksin pertama" AND Status_Vaksin_Saat_Ini = "Belum divaksin") THEN
 		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
-	ELSEIF (NEW.Tahap_Vaksin = "Vaksin kedua" AND Jumlah_Divaksin = 1) THEN
+	ELSEIF (NEW.Tahap_Vaksin = "Vaksin kedua" AND Status_Vaksin_Saat_Ini = "Vaksin pertama") THEN
 		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
-	ELSEIF (NEW.Tahap_Vaksin = "Vaksin ketiga" AND Jumlah_Divaksin = 2) THEN
+	ELSEIF (NEW.Tahap_Vaksin = "Vaksin ketiga" AND Status_Vaksin_Saat_Ini = "Vaksin kedua") THEN
 		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
 	ELSE
 		SIGNAL SQLSTATE "45000"
@@ -589,4 +596,4 @@ USE `tubes_basdat`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-21 20:35:12
+-- Dump completed on 2022-04-21 21:07:44

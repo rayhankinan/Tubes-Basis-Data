@@ -162,11 +162,17 @@ DELIMITER ;
 19. Trigger:
 DELIMITER //
 CREATE TRIGGER Handle_Vaksin
-BEFORE UPDATE ON Batch_Vaksin
+BEFORE INSERT ON Divaksin
 FOR EACH ROW
 BEGIN
-	IF (OLD.Jumlah_Tersedia > 0 AND OLD.Tanggal_Kadaluarsa >= CURRENT_DATE()) THEN
-		CALL Use_Vaksin(NEW.ID);
+	DECLARE Jumlah_Tersisa INT UNSIGNED;
+	DECLARE Tanggal_Expired DATE;
+	
+	SELECT Batch_Vaksin.Jumlah_Tersedia INTO Jumlah_Tersisa FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
+	SELECT Batch_Vaksin.Tanggal_Kadaluarsa INTO Tanggal_Expired FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
+
+	IF (Jumlah_Tersisa > 0 AND Tanggal_Expired >= CURRENT_DATE()) THEN
+		CALL Use_Vaksin(NEW.ID_Batch_Vaksin);
 	ELSE
 		SIGNAL SQLSTATE "45000"
 		SET MESSAGE_TEXT = "Vaksin telah habis terpakai atau sudah expired!";
@@ -178,16 +184,17 @@ DELIMITER ;
 20. Trigger:
 DELIMITER //
 CREATE TRIGGER Handle_Status
-BEFORE UPDATE ON Divaksin
+BEFORE INSERT ON Divaksin
 FOR EACH ROW
 BEGIN
-	DECLARE Jumlah_Divaksin INT DEFAULT 0;
-	SELECT COUNT(Divaksin.NIK) INTO Jumlah_Divaksin FROM Divaksin WHERE Divaksin.NIK = NEW.NIK;
-	IF (NEW.Tahap_Vaksin = "Vaksin pertama" AND Jumlah_Divaksin = 0) THEN
+	DECLARE Status_Vaksin_Saat_Ini ENUM("Belum divaksin", "Vaksin pertama", "Vaksin kedua", "Vaksin ketiga") DEFAULT "Belum divaksin";
+	SELECT Penduduk.Status_Vaksinasi INTO Status_Vaksin_Saat_Ini FROM Penduduk WHERE Penduduk.NIK = NEW.NIK ORDER BY Penduduk.Status_Vaksinasi DESC LIMIT 1;
+
+	IF (NEW.Tahap_Vaksin = "Vaksin pertama" AND Status_Vaksin_Saat_Ini = "Belum divaksin") THEN
 		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
-	ELSEIF (NEW.Tahap_Vaksin = "Vaksin kedua" AND Jumlah_Divaksin = 1) THEN
+	ELSEIF (NEW.Tahap_Vaksin = "Vaksin kedua" AND Status_Vaksin_Saat_Ini = "Vaksin pertama") THEN
 		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
-	ELSEIF (NEW.Tahap_Vaksin = "Vaksin ketiga" AND Jumlah_Divaksin = 2) THEN
+	ELSEIF (NEW.Tahap_Vaksin = "Vaksin ketiga" AND Status_Vaksin_Saat_Ini = "Vaksin kedua") THEN
 		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
 	ELSE
 		SIGNAL SQLSTATE "45000"
