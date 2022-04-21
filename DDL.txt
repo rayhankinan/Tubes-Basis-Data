@@ -202,7 +202,7 @@ BEGIN
 		CALL Update_Status(NEW.NIK, NEW.Tahap_Vaksin);
 	ELSE
 		SIGNAL SQLSTATE "45000"
-		SET MESSAGE_TEXT = "Penduduk sudah divaksin tiga kali!";
+		SET MESSAGE_TEXT = "Status tidak valid!";
 	END IF;
 END;
 //

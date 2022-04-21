@@ -119,37 +119,6 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Vaksin
-BEFORE INSERT ON Divaksin
-FOR EACH ROW
-BEGIN
-	DECLARE Jumlah_Tersisa INT UNSIGNED;
-	DECLARE Tanggal_Expired DATE;
-	
-	SELECT Batch_Vaksin.Jumlah_Tersedia INTO Jumlah_Tersisa FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
-	SELECT Batch_Vaksin.Tanggal_Kadaluarsa INTO Tanggal_Expired FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
-
-	IF (Jumlah_Tersisa > 0 AND Tanggal_Expired >= CURRENT_DATE()) THEN
-		CALL Use_Vaksin(NEW.ID_Batch_Vaksin);
-	ELSE
-		SIGNAL SQLSTATE "45000"
-		SET MESSAGE_TEXT = "Vaksin telah habis terpakai atau sudah expired!";
-	END IF;
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = cp850 */ ;
-/*!50003 SET character_set_results = cp850 */ ;
-/*!50003 SET collation_connection  = cp850_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Kapasitas
 BEFORE INSERT ON Divaksin
 FOR EACH ROW
@@ -181,6 +150,37 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Vaksin
+BEFORE INSERT ON Divaksin
+FOR EACH ROW
+BEGIN
+	DECLARE Jumlah_Tersisa INT UNSIGNED;
+	DECLARE Tanggal_Expired DATE;
+
+	SELECT Batch_Vaksin.Jumlah_Tersedia INTO Jumlah_Tersisa FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
+	SELECT Batch_Vaksin.Tanggal_Kadaluarsa INTO Tanggal_Expired FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
+
+	IF (Jumlah_Tersisa > 0 AND Tanggal_Expired >= NEW.Tanggal_Vaksin) THEN
+		CALL Use_Vaksin(NEW.ID_Batch_Vaksin);
+	ELSE
+		SIGNAL SQLSTATE "45000"
+		SET MESSAGE_TEXT = "Vaksin telah habis terpakai atau sudah expired!";
+	END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Status
 BEFORE INSERT ON Divaksin
 FOR EACH ROW
@@ -196,7 +196,7 @@ BEGIN
 		CALL Update_Status(NEW.NIK, NEW.Tahap_Vaksin);
 	ELSE
 		SIGNAL SQLSTATE "45000"
-		SET MESSAGE_TEXT = "Penduduk sudah divaksin tiga kali!";
+		SET MESSAGE_TEXT = "Status tidak valid!";
 	END IF;
 END */;;
 DELIMITER ;
@@ -615,4 +615,4 @@ USE `tubes_basdat`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-22  1:40:23
+-- Dump completed on 2022-04-22  1:53:21
