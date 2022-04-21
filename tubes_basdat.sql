@@ -455,10 +455,10 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Use_Vaksin`(IN Used_ID_Batch_Vaksin INT UNSIGNED)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Use_Vaksin`(IN Used_ID INT UNSIGNED)
 BEGIN
-	UPDATE Batch_Vaksin SET Jumlah_Tersedia = Jumlah_Tersedia - 1;
-	UPDATE Batch_Vaksin SET Jumlah_Terpakai = Jumlah_Terpakai + 1;
+	UPDATE Batch_Vaksin SET Jumlah_Tersedia = Jumlah_Tersedia - 1 WHERE ID = Used_ID;
+	UPDATE Batch_Vaksin SET Jumlah_Terpakai = Jumlah_Terpakai + 1 WHERE ID = Used_ID;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -500,4 +500,4 @@ USE `tubes_basdat`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-21 17:58:01
+-- Dump completed on 2022-04-21 18:06:32

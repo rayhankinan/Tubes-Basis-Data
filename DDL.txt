@@ -147,10 +147,13 @@ SELECT Status_Vaksinasi, COUNT(NIK) AS Jumlah_Penduduk FROM Penduduk GROUP BY St
 
 17. Procedure:
 DELIMITER //
-CREATE PROCEDURE Use_Vaksin (IN Used_ID_Batch_Vaksin INT UNSIGNED)
+CREATE PROCEDURE Use_Vaksin (IN Used_ID INT UNSIGNED)
 BEGIN
-	UPDATE Batch_Vaksin SET Jumlah_Tersedia = Jumlah_Tersedia - 1;
-	UPDATE Batch_Vaksin SET Jumlah_Terpakai = Jumlah_Terpakai + 1;
+	UPDATE Batch_Vaksin SET Jumlah_Tersedia = Jumlah_Tersedia - 1 WHERE ID = Used_ID;
+	UPDATE Batch_Vaksin SET Jumlah_Terpakai = Jumlah_Terpakai + 1 WHERE ID = Used_ID;
 END;
 //
 DELIMITER ;
+
+18. Trigger:
+DELIMITER //
