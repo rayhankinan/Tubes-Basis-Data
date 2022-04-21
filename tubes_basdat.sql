@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.6.7-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.19  Distrib 10.6.5-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: tubes_basdat
 -- ------------------------------------------------------
--- Server version	10.6.7-MariaDB
+-- Server version	10.6.5-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -93,7 +93,7 @@ CREATE TABLE `divaksin` (
   `NIK` varchar(16) NOT NULL,
   `ID_Batch_Vaksin` int(10) unsigned NOT NULL,
   `Tahap_Vaksin` enum('Vaksin pertama','Vaksin kedua','Vaksin ketiga') NOT NULL,
-  `Tanggal_Vaksin` date DEFAULT curdate(),
+  `Tanggal_Vaksin` date NOT NULL DEFAULT curdate(),
   PRIMARY KEY (`NIK`,`ID_Batch_Vaksin`),
   KEY `ID_Batch_Vaksin` (`ID_Batch_Vaksin`),
   CONSTRAINT `divaksin_ibfk_1` FOREIGN KEY (`NIK`) REFERENCES `penduduk` (`NIK`) ON DELETE CASCADE,
@@ -215,7 +215,7 @@ DROP TABLE IF EXISTS `fasilitas_kesehatan`;
 CREATE TABLE `fasilitas_kesehatan` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nama` varchar(255) NOT NULL,
-  `Kapasitas_Vaksin` int(10) unsigned DEFAULT 0,
+  `Kapasitas_Vaksin` int(10) unsigned NOT NULL DEFAULT 0,
   `ID_Kabupaten_Kota` int(10) unsigned NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `ID_Kabupaten_Kota` (`ID_Kabupaten_Kota`),
@@ -539,6 +539,49 @@ INSERT INTO `rumah_sakit` (`ID`, `Kepemilikkan`, `Kelas`) VALUES (1,'Negeri','2'
 UNLOCK TABLES;
 
 --
+-- Dumping routines for database 'tubes_basdat'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `Update_Status` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Status`(IN NIK VARCHAR(16), IN Tahap_Vaksin ENUM("Vaksin pertama", "Vaksin kedua", "Vaksin ketiga"))
+BEGIN
+	UPDATE Penduduk SET Status_Vaksinasi = Tahap_Vaksin WHERE Penduduk.NIK = NIK;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Use_Vaksin` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Use_Vaksin`(IN ID INT UNSIGNED)
+BEGIN
+	UPDATE Batch_Vaksin SET Jumlah_Tersedia = Jumlah_Tersedia - 1 WHERE Batch_Vaksin.ID = ID;
+	UPDATE Batch_Vaksin SET Jumlah_Terpakai = Jumlah_Terpakai + 1 WHERE Batch_Vaksin.ID = ID;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
 -- Current Database: `tubes_basdat`
 --
 
@@ -572,4 +615,4 @@ USE `tubes_basdat`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-22  0:24:16
+-- Dump completed on 2022-04-22  1:40:23

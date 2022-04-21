@@ -20,7 +20,7 @@ CREATE TABLE Kabupaten_Kota (
 CREATE TABLE Fasilitas_Kesehatan (
 	ID INT UNSIGNED AUTO_INCREMENT,
 	Nama VARCHAR(255) NOT NULL,
-	Kapasitas_Vaksin INT UNSIGNED DEFAULT 0,
+	Kapasitas_Vaksin INT UNSIGNED DEFAULT 0 NOT NULL,
 	ID_Kabupaten_Kota INT UNSIGNED NOT NULL,
 	PRIMARY KEY (ID),
 	FOREIGN KEY (ID_Kabupaten_Kota) REFERENCES Kabupaten_Kota (ID) ON DELETE CASCADE
@@ -74,7 +74,7 @@ CREATE TABLE Batch_Vaksin (
 
 9. Table:
 CREATE TABLE Log_Record (
-	Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+	Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP() NOT NULL,
 	Status ENUM("Diterima", "Tidak diterima") NOT NULL,
 	ID_Kabupaten_Kota INT UNSIGNED NOT NULL,
 	ID_Batch_Vaksin INT UNSIGNED NOT NULL,
@@ -135,7 +135,7 @@ CREATE TABLE Divaksin (
 	NIK VARCHAR(16),
 	ID_Batch_Vaksin INT UNSIGNED,
 	Tahap_Vaksin ENUM("Vaksin pertama", "Vaksin kedua", "Vaksin ketiga") NOT NULL,
-	Tanggal_Vaksin DATE DEFAULT CURRENT_DATE(),
+	Tanggal_Vaksin DATE DEFAULT CURRENT_DATE() NOT NULL,
 	PRIMARY KEY (NIK, ID_Batch_Vaksin),
 	FOREIGN KEY (NIK) REFERENCES Penduduk (NIK) ON DELETE CASCADE,
 	FOREIGN KEY (ID_Batch_Vaksin) REFERENCES Batch_Vaksin (ID) ON DELETE CASCADE
@@ -175,7 +175,7 @@ BEGIN
 	SELECT Batch_Vaksin.Jumlah_Tersedia INTO Jumlah_Tersisa FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
 	SELECT Batch_Vaksin.Tanggal_Kadaluarsa INTO Tanggal_Expired FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
 
-	IF (Jumlah_Tersisa > 0 AND Tanggal_Expired >= CURRENT_DATE()) THEN
+	IF (Jumlah_Tersisa > 0 AND Tanggal_Expired >= NEW.Tanggal_Vaksin) THEN
 		CALL Use_Vaksin(NEW.ID_Batch_Vaksin);
 	ELSE
 		SIGNAL SQLSTATE "45000"
