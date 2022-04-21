@@ -173,6 +173,37 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Kapasitas
+BEFORE INSERT ON Divaksin
+FOR EACH ROW
+BEGIN
+	DECLARE ID_Fasilitas_Kesehatan_Terkini INT UNSIGNED;
+	DECLARE Total_Tervaksin INT UNSIGNED;
+	DECLARE Total_Kapasitas INT UNSIGNED;
+
+	SELECT Batch_Vaksin.ID_Fasilitas_Kesehatan INTO ID_Fasilitas_Kesehatan_Terkini FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
+	SELECT COUNT(Divaksin.NIK) INTO Total_Tervaksin FROM Divaksin INNER JOIN Batch_Vaksin ON Divaksin.ID_Batch_Vaksin = Batch_Vaksin.ID WHERE Batch_Vaksin.ID_Fasilitas_Kesehatan = ID_Fasilitas_Kesehatan_Terkini AND Divaksin.Tanggal_Vaksin = NEW.Tanggal_Vaksin;
+	SELECT Fasilitas_Kesehatan.Kapasitas_Vaksin INTO Total_Kapasitas FROM Fasilitas_Kesehatan WHERE Fasilitas_Kesehatan.ID = ID_Fasilitas_Kesehatan_Terkini;
+
+	IF (Total_Tervaksin >= Total_Kapasitas) THEN
+		SIGNAL SQLSTATE "45000"
+		SET MESSAGE_TEXT = "Kapasitas vaksin tanggal tersebut tidak mencukupi!";
+	END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `fasilitas_kesehatan`
@@ -596,4 +627,4 @@ USE `tubes_basdat`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-21 21:07:44
+-- Dump completed on 2022-04-21 21:47:16
