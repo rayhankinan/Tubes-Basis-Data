@@ -443,6 +443,30 @@ INSERT INTO `rumah_sakit` (`ID`, `Kepemilikkan`, `Kelas`) VALUES (1,'Negeri','2'
 UNLOCK TABLES;
 
 --
+-- Dumping routines for database 'tubes_basdat'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `Use_Vaksin` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Use_Vaksin`(IN Used_ID_Batch_Vaksin INT UNSIGNED)
+BEGIN
+	UPDATE Batch_Vaksin SET Jumlah_Tersedia = Jumlah_Tersedia - 1;
+	UPDATE Batch_Vaksin SET Jumlah_Terpakai = Jumlah_Terpakai + 1;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
 -- Current Database: `tubes_basdat`
 --
 
@@ -476,4 +500,4 @@ USE `tubes_basdat`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-21 17:39:08
+-- Dump completed on 2022-04-21 17:58:01

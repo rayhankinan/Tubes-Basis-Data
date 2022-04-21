@@ -130,7 +130,7 @@ CREATE TABLE Penduduk (
 	PRIMARY KEY (NIK)
 );
 
-15. RELATIONSHIP:
+15. Relationship:
 CREATE TABLE Divaksin (
 	NIK VARCHAR(16),
 	ID_Batch_Vaksin INT UNSIGNED,
@@ -141,6 +141,16 @@ CREATE TABLE Divaksin (
 	FOREIGN KEY (ID_Batch_Vaksin) REFERENCES Batch_Vaksin (ID) ON DELETE CASCADE
 );
 
-16. View
+16. View:
 CREATE VIEW Jumlah_Penduduk_per_Tahap AS
 SELECT Status_Vaksinasi, COUNT(NIK) AS Jumlah_Penduduk FROM Penduduk GROUP BY Status_Vaksinasi;
+
+17. Procedure:
+DELIMITER //
+CREATE PROCEDURE Use_Vaksin (IN Used_ID_Batch_Vaksin INT UNSIGNED)
+BEGIN
+	UPDATE Batch_Vaksin SET Jumlah_Tersedia = Jumlah_Tersedia - 1;
+	UPDATE Batch_Vaksin SET Jumlah_Terpakai = Jumlah_Terpakai + 1;
+END;
+//
+DELIMITER ;
