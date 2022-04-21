@@ -157,3 +157,16 @@ DELIMITER ;
 
 18. Trigger:
 DELIMITER //
+CREATE TRIGGER Handle_Vaksin
+BEFORE UPDATE ON Batch_Vaksin
+FOR EACH ROW
+BEGIN
+	IF (OLD.Jumlah_Tersedia > 0 AND OLD.Tanggal_Kadaluarsa >= CURRENT_DATE()) THEN
+		CALL Use_Vaksin(NEW.ID);
+	ELSE
+		SIGNAL SQLSTATE "45000"
+		SET MESSAGE_TEXT = "Vaksin telah habis terpakai atau sudah expired!";
+	END IF;
+END;
+//
+DELIMITER ;
