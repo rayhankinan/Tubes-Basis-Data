@@ -190,6 +190,20 @@ INSERT INTO `jenis_vaksin` (`ID`, `Produsen`, `Nama`) VALUES (1,'China','Sinovac
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `jumlah_penduduk_per_tahap`
+--
+
+DROP TABLE IF EXISTS `jumlah_penduduk_per_tahap`;
+/*!50001 DROP VIEW IF EXISTS `jumlah_penduduk_per_tahap`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `jumlah_penduduk_per_tahap` (
+  `Status_Vaksinasi` tinyint NOT NULL,
+  `Jumlah_Penduduk` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `kabupaten_kota`
 --
 
@@ -427,6 +441,31 @@ LOCK TABLES `rumah_sakit` WRITE;
 INSERT INTO `rumah_sakit` (`ID`, `Kepemilikkan`, `Kelas`) VALUES (1,'Negeri','2'),(4,'Negeri','1'),(6,'Swasta','3'),(14,'Negeri','1'),(17,'Negeri','2'),(19,'Swasta','2'),(22,'Swasta','3'),(23,'Negeri','1'),(24,'Negeri','3'),(30,'Negeri','2'),(31,'Swasta','3'),(38,'Negeri','2'),(43,'Swasta','3'),(45,'Swasta','1'),(46,'Negeri','2'),(48,'Swasta','1'),(50,'Swasta','1'),(52,'Negeri','3'),(54,'Swasta','1'),(57,'Swasta','2'),(59,'Swasta','1'),(62,'Negeri','3'),(67,'Swasta','3'),(68,'Negeri','2'),(72,'Swasta','2'),(73,'Negeri','3'),(75,'Negeri','3'),(76,'Swasta','1'),(81,'Negeri','2'),(90,'Negeri','2'),(96,'Swasta','2'),(99,'Swasta','1'),(101,'Negeri','1'),(105,'Swasta','2'),(107,'Swasta','3'),(115,'Negeri','1'),(118,'Negeri','3'),(121,'Negeri','2'),(123,'Swasta','3'),(124,'Negeri','3'),(127,'Swasta','3'),(130,'Swasta','1'),(139,'Swasta','3'),(140,'Swasta','1'),(141,'Swasta','2'),(143,'Negeri','3'),(148,'Negeri','3'),(153,'Swasta','2'),(154,'Negeri','2'),(157,'Swasta','3'),(161,'Negeri','1'),(162,'Swasta','3'),(166,'Swasta','3'),(171,'Swasta','3'),(180,'Negeri','1'),(183,'Swasta','3'),(185,'Negeri','3'),(192,'Swasta','2'),(196,'Swasta','2'),(197,'Swasta','1'),(202,'Negeri','3'),(205,'Negeri','3'),(208,'Negeri','1'),(209,'Swasta','3'),(210,'Negeri','3'),(215,'Negeri','2'),(217,'Swasta','3'),(219,'Swasta','1'),(221,'Negeri','3'),(222,'Negeri','3'),(226,'Swasta','2'),(228,'Negeri','2'),(233,'Negeri','2'),(236,'Negeri','1'),(238,'Negeri','3'),(240,'Negeri','3'),(244,'Negeri','2'),(247,'Negeri','2'),(248,'Negeri','2');
 /*!40000 ALTER TABLE `rumah_sakit` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Current Database: `tubes_basdat`
+--
+
+USE `tubes_basdat`;
+
+--
+-- Final view structure for view `jumlah_penduduk_per_tahap`
+--
+
+/*!50001 DROP TABLE IF EXISTS `jumlah_penduduk_per_tahap`*/;
+/*!50001 DROP VIEW IF EXISTS `jumlah_penduduk_per_tahap`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = cp850 */;
+/*!50001 SET character_set_results     = cp850 */;
+/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `jumlah_penduduk_per_tahap` AS select `penduduk`.`Status_Vaksinasi` AS `Status_Vaksinasi`,count(`penduduk`.`NIK`) AS `Jumlah_Penduduk` from `penduduk` group by `penduduk`.`Status_Vaksinasi` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -437,4 +476,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-08 16:37:40
+-- Dump completed on 2022-04-21 17:39:08

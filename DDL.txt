@@ -70,7 +70,6 @@ CREATE TABLE Batch_Vaksin (
 	PRIMARY KEY (ID),
 	FOREIGN KEY (ID_Fasilitas_Kesehatan) REFERENCES Fasilitas_Kesehatan (ID) ON DELETE CASCADE,
 	FOREIGN KEY (ID_Jenis_Vaksin) REFERENCES Jenis_Vaksin (ID) ON DELETE CASCADE,
-	CONSTRAINT Available CHECK(Jumlah_Tersedia >= Jumlah_Terpakai)
 );
 
 9. Table:
@@ -141,3 +140,7 @@ CREATE TABLE Divaksin (
 	FOREIGN KEY (NIK) REFERENCES Penduduk (NIK) ON DELETE CASCADE,
 	FOREIGN KEY (ID_Batch_Vaksin) REFERENCES Batch_Vaksin (ID) ON DELETE CASCADE
 );
+
+16. View
+CREATE VIEW Jumlah_Penduduk_per_Tahap AS
+SELECT Status_Vaksinasi, COUNT(NIK) AS Jumlah_Penduduk FROM Penduduk GROUP BY Status_Vaksinasi;
