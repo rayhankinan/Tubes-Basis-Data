@@ -145,17 +145,21 @@ CREATE TABLE Divaksin (
 CREATE VIEW Jumlah_Penduduk_per_Tahap AS
 SELECT Status_Vaksinasi, COUNT(NIK) AS Jumlah_Penduduk FROM Penduduk GROUP BY Status_Vaksinasi;
 
-17. Procedure:
+17. View:
+CREATE VIEW Jumlah_Penduduk_per_Kategori AS
+SELECT Status_Vaksinasi, COUNT(NIK) AS Jumlah_Penduduk FROM Penduduk GROUP BY Kategori;
+
+18. Procedure:
 DELIMITER //
-CREATE PROCEDURE Use_Vaksin (IN Used_ID INT UNSIGNED)
+CREATE PROCEDURE Use_Vaksin (IN ID INT UNSIGNED)
 BEGIN
-	UPDATE Batch_Vaksin SET Jumlah_Tersedia = Jumlah_Tersedia - 1 WHERE ID = Used_ID;
-	UPDATE Batch_Vaksin SET Jumlah_Terpakai = Jumlah_Terpakai + 1 WHERE ID = Used_ID;
+	UPDATE Batch_Vaksin SET Jumlah_Tersedia = Jumlah_Tersedia - 1 WHERE Batch_Vaksin.ID = ID;
+	UPDATE Batch_Vaksin SET Jumlah_Terpakai = Jumlah_Terpakai + 1 WHERE Batch_Vaksin.ID = ID;
 END;
 //
 DELIMITER ;
 
-18. Trigger:
+19. Trigger:
 DELIMITER //
 CREATE TRIGGER Handle_Vaksin
 BEFORE UPDATE ON Batch_Vaksin
@@ -166,6 +170,28 @@ BEGIN
 	ELSE
 		SIGNAL SQLSTATE "45000"
 		SET MESSAGE_TEXT = "Vaksin telah habis terpakai atau sudah expired!";
+	END IF;
+END;
+//
+DELIMITER ;
+
+20. Trigger:
+DELIMITER //
+CREATE TRIGGER Handle_Status
+BEFORE UPDATE ON Divaksin
+FOR EACH ROW
+BEGIN
+	DECLARE Jumlah_Divaksin INT DEFAULT 0;
+	SELECT COUNT(Divaksin.NIK) INTO Jumlah_Divaksin FROM Divaksin WHERE Divaksin.NIK = NEW.NIK;
+	IF (NEW.Tahap_Vaksin = "Vaksin pertama" AND Jumlah_Divaksin = 0) THEN
+		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
+	ELSEIF (NEW.Tahap_Vaksin = "Vaksin kedua" AND Jumlah_Divaksin = 1) THEN
+		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
+	ELSEIF (NEW.Tahap_Vaksin = "Vaksin ketiga" AND Jumlah_Divaksin = 2) THEN
+		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
+	ELSE
+		SIGNAL SQLSTATE "45000"
+		SET MESSAGE_TEXT = "Penduduk sudah divaksin tiga kali!";
 	END IF;
 END;
 //
