@@ -150,22 +150,21 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Status
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Kapasitas
 BEFORE INSERT ON Divaksin
 FOR EACH ROW
 BEGIN
-	DECLARE Status_Vaksin_Saat_Ini ENUM("Belum divaksin", "Vaksin pertama", "Vaksin kedua", "Vaksin ketiga") DEFAULT "Belum divaksin";
-	SELECT Penduduk.Status_Vaksinasi INTO Status_Vaksin_Saat_Ini FROM Penduduk WHERE Penduduk.NIK = NEW.NIK ORDER BY Penduduk.Status_Vaksinasi DESC LIMIT 1;
+	DECLARE ID_Fasilitas_Kesehatan_Terkini INT UNSIGNED;
+	DECLARE Total_Tervaksin INT UNSIGNED;
+	DECLARE Total_Kapasitas INT UNSIGNED;
 
-	IF (NEW.Tahap_Vaksin = "Vaksin pertama" AND Status_Vaksin_Saat_Ini = "Belum divaksin") THEN
-		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
-	ELSEIF (NEW.Tahap_Vaksin = "Vaksin kedua" AND Status_Vaksin_Saat_Ini = "Vaksin pertama") THEN
-		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
-	ELSEIF (NEW.Tahap_Vaksin = "Vaksin ketiga" AND Status_Vaksin_Saat_Ini = "Vaksin kedua") THEN
-		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
-	ELSE
+	SELECT Batch_Vaksin.ID_Fasilitas_Kesehatan INTO ID_Fasilitas_Kesehatan_Terkini FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
+	SELECT COUNT(Divaksin.NIK) INTO Total_Tervaksin FROM Divaksin INNER JOIN Batch_Vaksin ON Divaksin.ID_Batch_Vaksin = Batch_Vaksin.ID WHERE Batch_Vaksin.ID_Fasilitas_Kesehatan = ID_Fasilitas_Kesehatan_Terkini AND Divaksin.Tanggal_Vaksin = NEW.Tanggal_Vaksin;
+	SELECT Fasilitas_Kesehatan.Kapasitas_Vaksin INTO Total_Kapasitas FROM Fasilitas_Kesehatan WHERE Fasilitas_Kesehatan.ID = ID_Fasilitas_Kesehatan_Terkini;
+
+	IF (Total_Tervaksin >= Total_Kapasitas) THEN
 		SIGNAL SQLSTATE "45000"
-		SET MESSAGE_TEXT = "Penduduk sudah divaksin tiga kali!";
+		SET MESSAGE_TEXT = "Kapasitas vaksin tanggal tersebut tidak mencukupi!";
 	END IF;
 END */;;
 DELIMITER ;
@@ -182,21 +181,22 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Kapasitas
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER Handle_Status
 BEFORE INSERT ON Divaksin
 FOR EACH ROW
 BEGIN
-	DECLARE ID_Fasilitas_Kesehatan_Terkini INT UNSIGNED;
-	DECLARE Total_Tervaksin INT UNSIGNED;
-	DECLARE Total_Kapasitas INT UNSIGNED;
+	DECLARE Status_Vaksin_Saat_Ini ENUM("Belum divaksin", "Vaksin pertama", "Vaksin kedua", "Vaksin ketiga") DEFAULT "Belum divaksin";
+	SELECT Penduduk.Status_Vaksinasi INTO Status_Vaksin_Saat_Ini FROM Penduduk WHERE Penduduk.NIK = NEW.NIK ORDER BY Penduduk.Status_Vaksinasi DESC LIMIT 1;
 
-	SELECT Batch_Vaksin.ID_Fasilitas_Kesehatan INTO ID_Fasilitas_Kesehatan_Terkini FROM Batch_Vaksin WHERE Batch_Vaksin.ID = NEW.ID_Batch_Vaksin;
-	SELECT COUNT(Divaksin.NIK) INTO Total_Tervaksin FROM Divaksin INNER JOIN Batch_Vaksin ON Divaksin.ID_Batch_Vaksin = Batch_Vaksin.ID WHERE Batch_Vaksin.ID_Fasilitas_Kesehatan = ID_Fasilitas_Kesehatan_Terkini AND Divaksin.Tanggal_Vaksin = NEW.Tanggal_Vaksin;
-	SELECT Fasilitas_Kesehatan.Kapasitas_Vaksin INTO Total_Kapasitas FROM Fasilitas_Kesehatan WHERE Fasilitas_Kesehatan.ID = ID_Fasilitas_Kesehatan_Terkini;
-
-	IF (Total_Tervaksin >= Total_Kapasitas) THEN
+	IF (NEW.Tahap_Vaksin = "Vaksin pertama" AND Status_Vaksin_Saat_Ini = "Belum divaksin") THEN
+		CALL Update_Status(NEW.NIK, NEW.Tahap_Vaksin);
+	ELSEIF (NEW.Tahap_Vaksin = "Vaksin kedua" AND Status_Vaksin_Saat_Ini = "Vaksin pertama") THEN
+		CALL Update_Status(NEW.NIK, NEW.Tahap_Vaksin);
+	ELSEIF (NEW.Tahap_Vaksin = "Vaksin ketiga" AND Status_Vaksin_Saat_Ini = "Vaksin kedua") THEN
+		CALL Update_Status(NEW.NIK, NEW.Tahap_Vaksin);
+	ELSE
 		SIGNAL SQLSTATE "45000"
-		SET MESSAGE_TEXT = "Kapasitas vaksin tanggal tersebut tidak mencukupi!";
+		SET MESSAGE_TEXT = "Penduduk sudah divaksin tiga kali!";
 	END IF;
 END */;;
 DELIMITER ;
@@ -553,6 +553,25 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'tubes_basdat'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `Update_Status` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Status`(IN NIK VARCHAR(16), IN Tahap_Vaksin ENUM("Vaksin pertama", "Vaksin kedua", "Vaksin ketiga"))
+BEGIN
+	UPDATE Penduduk SET Status_Vaksinasi = Tahap_Vaksin WHERE Penduduk.NIK = NIK;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Use_Vaksin` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -627,4 +646,4 @@ USE `tubes_basdat`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-21 21:47:16
+-- Dump completed on 2022-04-21 21:58:53

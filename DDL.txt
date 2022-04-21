@@ -159,6 +159,15 @@ END;
 //
 DELIMITER ;
 
+19. Procedure:
+DELIMITER //
+CREATE PROCEDURE Update_Status (IN NIK VARCHAR(16), IN Tahap_Vaksin ENUM("Vaksin pertama", "Vaksin kedua", "Vaksin ketiga"))
+BEGIN
+	UPDATE Penduduk SET Status_Vaksinasi = Tahap_Vaksin WHERE Penduduk.NIK = NIK;
+END;
+//
+DELIMITER ;
+
 19. Trigger:
 DELIMITER //
 CREATE TRIGGER Handle_Vaksin
@@ -191,11 +200,11 @@ BEGIN
 	SELECT Penduduk.Status_Vaksinasi INTO Status_Vaksin_Saat_Ini FROM Penduduk WHERE Penduduk.NIK = NEW.NIK ORDER BY Penduduk.Status_Vaksinasi DESC LIMIT 1;
 
 	IF (NEW.Tahap_Vaksin = "Vaksin pertama" AND Status_Vaksin_Saat_Ini = "Belum divaksin") THEN
-		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
+		CALL Update_Status(NEW.NIK, NEW.Tahap_Vaksin);
 	ELSEIF (NEW.Tahap_Vaksin = "Vaksin kedua" AND Status_Vaksin_Saat_Ini = "Vaksin pertama") THEN
-		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
+		CALL Update_Status(NEW.NIK, NEW.Tahap_Vaksin);
 	ELSEIF (NEW.Tahap_Vaksin = "Vaksin ketiga" AND Status_Vaksin_Saat_Ini = "Vaksin kedua") THEN
-		UPDATE Penduduk SET Status_Vaksinasi = NEW.Tahap_Vaksin WHERE Penduduk.NIK = NEW.NIK;
+		CALL Update_Status(NEW.NIK, NEW.Tahap_Vaksin);
 	ELSE
 		SIGNAL SQLSTATE "45000"
 		SET MESSAGE_TEXT = "Penduduk sudah divaksin tiga kali!";
