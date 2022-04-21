@@ -142,14 +142,9 @@ CREATE TABLE Divaksin (
 );
 
 16. View:
-CREATE VIEW Jumlah_Penduduk_per_Tahap AS
-SELECT Status_Vaksinasi, COUNT(NIK) AS Jumlah_Penduduk FROM Penduduk GROUP BY Status_Vaksinasi;
+CREATE VIEW Jumlah_penduduk_pada_kategori_tertentu_per_tahap AS SELECT Kategori, COUNT(IF(Status_vaksinasi = 'Vaksin pertama', 1, NOT NULL)) 'Vaksin pertama' , COUNT(IF(Status_vaksinasi = 'Vaksin kedua', 1, NOT NULL)) 'Vaksin kedua' , COUNT(IF(Status_vaksinasi = 'Vaksin ketiga', 1, NOT NULL)) 'Vaksin ketiga' FROM Penduduk GROUP BY Kategori;
 
-17. View:
-CREATE VIEW Jumlah_Penduduk_per_Kategori AS
-SELECT Status_Vaksinasi, COUNT(NIK) AS Jumlah_Penduduk FROM Penduduk GROUP BY Kategori;
-
-18. Procedure:
+17. Procedure:
 DELIMITER //
 CREATE PROCEDURE Use_Vaksin (IN ID INT UNSIGNED)
 BEGIN
@@ -159,7 +154,7 @@ END;
 //
 DELIMITER ;
 
-19. Procedure:
+18. Procedure:
 DELIMITER //
 CREATE PROCEDURE Update_Status (IN NIK VARCHAR(16), IN Tahap_Vaksin ENUM("Vaksin pertama", "Vaksin kedua", "Vaksin ketiga"))
 BEGIN
